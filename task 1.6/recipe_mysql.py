@@ -7,9 +7,9 @@ conn = mysql.connector.connect(
 
 cursor = conn.cursor()
 
-cursor.execute("CREATE DATABASE IF NOT EXISTS task_database1")
+cursor.execute("CREATE DATABASE IF NOT EXISTS task_database2")
 
-cursor.execute("USE task_database1")
+cursor.execute("USE task_database2")
 
 cursor.execute('''
 CREATE TABLE IF NOT EXISTS Recipes(

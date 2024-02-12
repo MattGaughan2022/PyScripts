@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine
 
-engine = create_engine("mysql://cf-python:password@localhost/task_database1")
+engine = create_engine("mysql://cf-python:password@localhost/task_database2")
 
 
 from sqlalchemy.ext.declarative import declarative_base
@@ -115,18 +115,16 @@ def update_recipe():
     id_update = input("Select the ID of a recipe you wish to UPDATE: ")
     try: 
         id_update = int(id_update)
-        if(id_update in i):
-            next
-        else:
-            input("Bad input. Back to main loop...")
-            return 1
     except:
-        input("Bad input. Back to main loop...")
+        input("Bad ID input. Please try again and enter an integer. Back to main loop...")
         return 1
-
+    if(id_update not in i):
+        input("Bad integer input. Back to main loop...")
+        return 1
+    
     column_update = input("Which category/column did you want to update? (name, ingredients, cooking_time): ")
     if(column_update == ('name' or 'Name')):
-        change = input("What would you like to change the name of [" + row.name + "] to? ")
+        change = input("What would you like to change the name of [" + result[id_update-1].name + "] to? ")
         if(len(change) > 0 and len(change) < 50):
             session.query(Recipe).filter(Recipe.name == row.name).update({Recipe.name: change})
             session.commit
@@ -173,9 +171,9 @@ def delete_recipe():
     for row in result:
         i.append(row.id)
         print(row)
-        print("ID:", row.id, " |  RECIPE: " + row.name, " |  INGREDIENTS: "+  row.ingredients)
     id_delete = input("Select the ID of a recipe you wish to delete: ")
     try: 
+        id_delete = int(id_delete)
         if(id_delete in i):
             try:
                 to_delete = session.query(Recipe).filter(Recipe.id == id_delete).one()
@@ -194,7 +192,7 @@ def delete_recipe():
             print("Bad input. Back to main loop")
             return None
     except:
-        print("Bad input. Back to main loop")
+        print("Bad ID input. Back to main loop")
         return None
 
 
