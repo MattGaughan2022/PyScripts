@@ -1,0 +1,1 @@
+This Django project is to demonstrate manipulating Django sqlite databases and create a basic app. The theme of the app is for a cookbook website, allowing users to search for recipes based on category (desert, dinner, beverages) or by ingredient to find a new recipe. This version is implementing the database models and testing them, and also entering manually in the admin panel.
